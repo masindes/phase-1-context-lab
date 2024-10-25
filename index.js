@@ -45,6 +45,17 @@ function wagesEarnedOnDate(employee, date) {
     let hours = hoursWorkedOnDate(employee, date); // Get the number of hours worked on the given date
     return hours * employee.payPerHour; // Multiply hours worked by the employee's pay per hour
 }
+// const allWagesFor = function () {
+//     const eligibleDates = this.timeInEvents.map(function (e) {
+//         return e.date; // Map to get all dates
+//     });
+
+//     const payable = eligibleDates.reduce(function (memo, d) {
+//         return memo + wagesEarnedOnDate.call(this, d); // Sum up wages for each date
+//     }.bind(this), 0); // Bind this context to the callback
+
+//     return payable;
+// };
 
 /*
  We're giving you this function. Take a look at it, you might see some usage
@@ -67,3 +78,8 @@ const allWagesFor = function () {
     return payable
 }
 
+function calculatePayroll(employeeRecords) {
+    return employeeRecords.reduce((memo, rec) => {
+        return memo + allWagesFor.call(rec); // Sum up all wages for all employees
+    }, 0);
+}
