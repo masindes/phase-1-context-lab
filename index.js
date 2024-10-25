@@ -35,6 +35,12 @@ function createTimeOutEvent(employee, dateTime) {
 
     return employee; // Return the updated employee record
 }
+function hoursWorkedOnDate(employee, date) {
+    let timeIn = employee.timeInEvents.find(event => event.date === date); // Find the TimeIn event for the given date
+    let timeOut = employee.timeOutEvents.find(event => event.date === date); // Find the TimeOut event for the given date
+
+    return (timeOut.hour - timeIn.hour) / 100; // Calculate hours worked and convert to hours
+}
 
 /*
  We're giving you this function. Take a look at it, you might see some usage
