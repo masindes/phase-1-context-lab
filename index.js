@@ -13,6 +13,17 @@ function createEmployeeRecord(array) {
 function createEmployeeRecords(arrayOfArrays) {
     return arrayOfArrays.map(createEmployeeRecord); // Use map to convert an array of arrays into an array of employee records
 }
+function createTimeInEvent(employee, dateTime) {
+    let [date, hour] = dateTime.split(' '); // Split dateTime into date and hour parts
+
+    employee.timeInEvents.push({
+        type: "TimeIn", // Set type to "TimeIn"
+        hour: parseInt(hour, 10), // Parse the hour part as an integer
+        date: date // Set the date
+    });
+
+    return employee; // Return the updated employee record
+}
 
 /*
  We're giving you this function. Take a look at it, you might see some usage
