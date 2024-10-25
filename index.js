@@ -10,6 +10,9 @@ function createEmployeeRecord(array) {
         timeOutEvents: [] // Initialize an empty array for timeOutEvents
     };
 }
+function createEmployeeRecords(arrayOfArrays) {
+    return arrayOfArrays.map(createEmployeeRecord); // Use map to convert an array of arrays into an array of employee records
+}
 
 /*
  We're giving you this function. Take a look at it, you might see some usage
