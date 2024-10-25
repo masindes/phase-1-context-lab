@@ -35,6 +35,18 @@ function createTimeOutEvent(employee, dateTime) {
 
     return employee; // Return the updated employee record
 }
+function createTimeInEvent(employee, dateTime) {
+    let [date, hour] = dateTime.split(' '); // Split dateTime into date and hour parts
+
+    employee.timeInEvents.push({
+        type: "TimeIn", // Creates the correct type
+        hour: parseInt(hour, 10), // Extracts the correct hour and converts it to an integer
+        date: date // Extracts the correct date
+    });
+
+    return employee; // Return the updated employee record
+}
+
 function hoursWorkedOnDate(employee, date) {
     let timeIn = employee.timeInEvents.find(event => event.date === date); // Find the TimeIn event for the given date
     let timeOut = employee.timeOutEvents.find(event => event.date === date); // Find the TimeOut event for the given date
@@ -76,6 +88,17 @@ const allWagesFor = function () {
     }.bind(this), 0) // <== Hm, why did we need to add bind() there? We'll discuss soon!
 
     return payable
+}
+function createTimeOutEvent(employee, dateTime) {
+    let [date, hour] = dateTime.split(' '); // Split dateTime into date and hour parts
+
+    employee.timeOutEvents.push({
+        type: "TimeOut", // Creates the correct type
+        hour: parseInt(hour, 10), // Extracts the correct hour and converts it to an integer
+        date: date // Extracts the correct date
+    });
+
+    return employee; // Return the updated employee record
 }
 
 function calculatePayroll(employeeRecords) {
