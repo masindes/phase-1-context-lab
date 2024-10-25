@@ -2,50 +2,14 @@
 
 function createEmployeeRecord(array) {
     return {
-        firstName: array[0],
-        familyName: array[1],
-        title: array[2],
-        payPerHour: array[3],
-        timeInEvents: [],
-        timeOutEvents: []
+        firstName: array[0], // Populate firstName from the 0th element
+        familyName: array[1], // Populate familyName from the 1th element
+        title: array[2], // Populate title from the 2th element
+        payPerHour: array[3], // Populate payPerHour from the 3th element
+        timeInEvents: [], // Initialize an empty array for timeInEvents
+        timeOutEvents: [] // Initialize an empty array for timeOutEvents
     };
 }
-function createEmployeeRecords(arrayOfArrays) {
-    return arrayOfArrays.map(createEmployeeRecord);
-}
-function createTimeInEvent(employee, dateTime) {
-    let [date, hour] = dateTime.split(' ');
-
-    employee.timeInEvents.push({
-        type: "TimeIn",
-        hour: parseInt(hour, 10),
-        date: date
-    });
-
-    return employee;
-}
-function createTimeOutEvent(employee, dateTime) {
-    let [date, hour] = dateTime.split(' ');
-
-    employee.timeOutEvents.push({
-        type: "TimeOut",
-        hour: parseInt(hour, 10),
-        date: date
-    });
-
-    return employee;
-}
-function hoursWorkedOnDate(employee, date) {
-    let timeIn = employee.timeInEvents.find(event => event.date === date);
-    let timeOut = employee.timeOutEvents.find(event => event.date === date);
-
-    return (timeOut.hour - timeIn.hour) / 100;
-}
-function wagesEarnedOnDate(employee, date) {
-    let hours = hoursWorkedOnDate(employee, date);
-    return hours * employee.payPerHour;
-}
-
 
 /*
  We're giving you this function. Take a look at it, you might see some usage
