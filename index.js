@@ -83,3 +83,19 @@ function calculatePayroll(employeeRecords) {
         return memo + allWagesFor.call(rec); // Sum up all wages for all employees
     }, 0);
 }
+let employees = [
+    ["Thor", "Odinsson", "God of Thunder", 20],
+    ["Loki", "Laufeysson-Odinsson", "Evil Genius", 15]
+];
+
+let employeeRecords = createEmployeeRecords(employees); // Create employee records from array of arrays
+
+createTimeInEvent(employeeRecords[0], "2021-11-01 0900"); // Add TimeIn event for Thor
+createTimeOutEvent(employeeRecords[0], "2021-11-01 1700"); // Add TimeOut event for Thor
+createTimeInEvent(employeeRecords[1], "2021-11-02 0800"); // Add TimeIn event for Loki
+createTimeOutEvent(employeeRecords[1], "2021-11-02 1600"); // Add TimeOut event for Loki
+
+console.log(allWagesFor.call(employeeRecords[0])); // Calculate wages for Thor
+console.log(allWagesFor.call(employeeRecords[1])); // Calculate wages for Loki
+
+console.log(calculatePayroll(employeeRecords)); // Calculate total payroll
