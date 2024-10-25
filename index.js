@@ -1,146 +1,132 @@
-/* Your Code Here */
-
+// Function to create an employee record from an array
 function createEmployeeRecord(array) {
     return {
-        firstName: array[0], // Populate firstName from the 0th element
-        familyName: array[1], // Populate familyName from the 1th element
-        title: array[2], // Populate title from the 2th element
-        payPerHour: array[3], // Populate payPerHour from the 3th element
-        timeInEvents: [], // Initialize an empty array for timeInEvents
-        timeOutEvents: [] // Initialize an empty array for timeOutEvents
+      firstName: array[0],
+      familyName: array[1],
+      title: array[2],
+      payPerHour: array[3],
+      timeInEvents: [],
+      timeOutEvents: []
     };
-}
-function createEmployeeRecords(arrayOfArrays) {
-    return arrayOfArrays.map(createEmployeeRecord); // Use map to convert an array of arrays into an array of employee records
-}
-function createTimeInEvent(employee, dateTime) {
-    let [date, hour] = dateTime.split(' '); // Split dateTime into date and hour parts
-
-    employee.timeInEvents.push({
-        type: "TimeIn", // Set type to "TimeIn"
-        hour: parseInt(hour, 10), // Parse the hour part as an integer
-        date: date // Set the date
-    });
-
-    return employee; // Return the updated employee record
-}
-function createTimeOutEvent(employee, dateTime) {
-    let [date, hour] = dateTime.split(' '); // Split dateTime into date and hour parts
-
-    employee.timeOutEvents.push({
-        type: "TimeOut", // Set type to "TimeOut"
-        hour: parseInt(hour, 10), // Parse the hour part as an integer
-        date: date // Set the date
-    });
-
-    return employee; // Return the updated employee record
-}
-function createTimeInEvent(employee, dateTime) {
-    let [date, hour] = dateTime.split(' '); // Split dateTime into date and hour parts
-
-    employee.timeInEvents.push({
-        type: "TimeIn", // Creates the correct type
-        hour: parseInt(hour, 10), // Extracts the correct hour and converts it to an integer
-        date: date // Extracts the correct date
-    });
-
-    return employee; // Return the updated employee record
-}
-
-function hoursWorkedOnDate(employee, date) {
-    let timeIn = employee.timeInEvents.find(event => event.date === date); // Find the TimeIn event for the given date
-    let timeOut = employee.timeOutEvents.find(event => event.date === date); // Find the TimeOut event for the given date
-
-    return (timeOut.hour - timeIn.hour) / 100; // Calculate hours worked and convert to hours
-}
-function wagesEarnedOnDate(employee, date) {
-    let hours = hoursWorkedOnDate(employee, date); // Get the number of hours worked on the given date
-    return hours * employee.payPerHour; // Multiply hours worked by the employee's pay per hour
-}
-// const allWagesFor = function () {
-//     const eligibleDates = this.timeInEvents.map(function (e) {
-//         return e.date; // Map to get all dates
-//     });
-
-//     const payable = eligibleDates.reduce(function (memo, d) {
-//         return memo + wagesEarnedOnDate.call(this, d); // Sum up wages for each date
-//     }.bind(this), 0); // Bind this context to the callback
-
-//     return payable;
-// };
-
-/*
- We're giving you this function. Take a look at it, you might see some usage
- that's new and different. That's because we're avoiding a well-known, but
- sneaky bug that we'll cover in the next few lessons!
-
- As a result, the lessons for this function will pass *and* it will be available
- for you to use if you need it!
- */
-
-const allWagesFor = function () {
-    const eligibleDates = this.timeInEvents.map(function (e) {
-        return e.date
-    })
-
-    const payable = eligibleDates.reduce(function (memo, d) {
-        return memo + wagesEarnedOnDate.call(this, d)
-    }.bind(this), 0) // <== Hm, why did we need to add bind() there? We'll discuss soon!
-
-    return payable
-}
-function createTimeOutEvent(employee, dateTime) {
-    let [date, hour] = dateTime.split(' '); // Split dateTime into date and hour parts
-
-    employee.timeOutEvents.push({
-        type: "TimeOut", // Creates the correct type
-        hour: parseInt(hour, 10), // Extracts the correct hour and converts it to an integer
-        date: date // Extracts the correct date
-    });
-
-    return employee; // Return the updated employee record
-}
-
-function calculatePayroll(employeeRecords) {
-    return employeeRecords.reduce((memo, rec) => {
-        return memo + allWagesFor.call(rec); // Sum up all wages for all employees
-    }, 0);
-}
-let employees = [
-    ["Thor", "Odinsson", "God of Thunder", 20],
-    ["Loki", "Laufeysson-Odinsson", "Evil Genius", 15]
-];
-function createTimeInEvent(employee, dateTime) {
-    let [date, hour] = dateTime.split(' '); // Split dateTime into date and hour parts
-
-    employee.timeInEvents.push({
-        type: "TimeIn", // Creates the correct type
-        hour: parseInt(hour, 10), // Extracts the correct hour and converts it to an integer
-        date: date // Extracts the correct date
-    });
-
-    return employee; // Return the updated employee record
-}
-function createTimeOutEvent(employee, dateTime) {
-    let [date, hour] = dateTime.split(' '); // Split dateTime into date and hour parts
-
-    employee.timeOutEvents.push({
-        type: "TimeOut", // Creates the correct type
-        hour: parseInt(hour, 10), // Extracts the correct hour and converts it to an integer
-        date: date // Extracts the correct date
-    });
-
-    return employee; // Return the updated employee record
-}
-
-let employeeRecords = createEmployeeRecords(employees); // Create employee records from array of arrays
-
-createTimeInEvent(employeeRecords[0], "2021-11-01 0900"); // Add TimeIn event for Thor
-createTimeOutEvent(employeeRecords[0], "2021-11-01 1700"); // Add TimeOut event for Thor
-createTimeInEvent(employeeRecords[1], "2021-11-02 0800"); // Add TimeIn event for Loki
-createTimeOutEvent(employeeRecords[1], "2021-11-02 1600"); // Add TimeOut event for Loki
-
-console.log(allWagesFor.call(employeeRecords[0])); // Calculate wages for Thor
-console.log(allWagesFor.call(employeeRecords[1])); // Calculate wages for Loki
-
-console.log(calculatePayroll(employeeRecords)); // Calculate total payroll
+  }
+  
+  // Function to create multiple employee records from an array of arrays
+  function createEmployeeRecords(arrayOfArrays) {
+    return arrayOfArrays.map(createEmployeeRecord);
+  }
+  
+  // Function to create a timeIn event
+  function createTimeInEvent(employeeRecord, dateTime) {
+    const [date, hour] = dateTime.split(' ');
+    const timeInEvent = {
+      type: "TimeIn",
+      hour: parseInt(hour),
+      date: date
+    };
+    employeeRecord.timeInEvents.push(timeInEvent);
+    return employeeRecord;
+  }
+  
+  
+  function createTimeInEvent(employeeRecord, dateTime) {
+    // Split the dateTime string into date and hour
+    const [date, hour] = dateTime.split(' ');
+    
+    // Create the timeIn event object
+    const timeInEvent = {
+      type: "TimeIn", // 1) creates the correct type
+      hour: parseInt(hour), // 3) extracts the correct hour
+      date: date // 2) extracts the correct date
+    };
+    // Test the createTimeInEvent function
+function testCreateTimeInEvent() {
+    // Create a sample employee record
+    const employeeRecord = {
+      firstName: "Loki",
+      familyName: "Laufeyson",
+      title: "God of Mischief",
+      payPerHour: 20,
+      timeInEvents: [],
+      timeOutEvents: []
+    };
+  
+    // Call the createTimeInEvent function
+    const updatedRecord = createTimeInEvent(employeeRecord, "2023-10-01 0900");
+  
+    // Assertions
+    console.assert(updatedRecord.timeInEvents.length === 1, "TimeInEvents should have 1 event");
+    console.assert(updatedRecord.timeInEvents[0].type === "TimeIn", "Event type should be 'TimeIn'");
+    console.assert(updatedRecord.timeInEvents[0].date === "2023-10-01", "Date should be '2023-10-01'");
+    console.assert(updatedRecord.timeInEvents[0].hour === 900, "Hour should be 900");
+  
+    console.log("All tests passed!");
+  }
+  
+  // Run the test
+  testCreateTimeInEvent();
+  
+    // Push the event to the employee's timeInEvents array
+    employeeRecord.timeInEvents.push(timeInEvent);
+    
+    // Return the updated employee record
+    return employeeRecord;
+  }
+  // Function to create a timeOut event
+  function createTimeOutEvent(employeeRecord, dateTime) {
+    const [date, hour] = dateTime.split(' ');
+    const timeOutEvent = {
+      type: "TimeOut",
+      hour: parseInt(hour),
+      date: date
+    };
+    employeeRecord.timeOutEvents.push(timeOutEvent);
+    return employeeRecord;
+  }
+  
+  // Function to calculate hours worked on a specific date
+  function hoursWorkedOnDate(employeeRecord, date) {
+    const timeIn = employeeRecord.timeInEvents.find(event => event.date === date);
+    const timeOut = employeeRecord.timeOutEvents.find(event => event.date === date);
+    return (timeOut.hour - timeIn.hour) / 100; // Convert to hours
+  }
+  
+  // Function to calculate wages earned on a specific date
+  function wagesEarnedOnDate(employeeRecord, date) {
+    const hoursWorked = hoursWorkedOnDate(employeeRecord, date);
+    return hoursWorked * employeeRecord.payPerHour;
+  }
+  
+  // Function to calculate all wages for an employee
+  function allWagesFor(employeeRecord) {
+    const dates = employeeRecord.timeInEvents.map(event => event.date);
+    return dates.reduce((total, date) => total + wagesEarnedOnDate(employeeRecord, date), 0);
+  }
+  
+  // Function to calculate total payroll for an array of employee records
+  function calculatePayroll(employeeRecords) {
+    return employeeRecords.reduce((total, record) => total + allWagesFor(record), 0);
+  }
+  
+  // Function to find an employee by first name
+  function findEmployeeByFirstName(collection, firstNameString) {
+    return collection.find(employee => employee.firstName === firstNameString);
+  }
+  
+  // Example usage with mock data
+  const employeesData = [
+    ["Loki", "Laufeyson", "God of Mischief", 20],
+    ["Natalia", "Romanoff", "Black Widow", 27]
+  ];
+  
+  const employeeRecords = createEmployeeRecords(employeesData);
+  
+  // Adding time in and time out events
+  createTimeInEvent(employeeRecords[0], "2023-10-01 0900");
+  createTimeOutEvent(employeeRecords[0], "2023-10-01 1100");
+  
+  createTimeInEvent(employeeRecords[1], "2023-10-01 1000");
+  createTimeOutEvent(employeeRecords[1], "2023-10-01 1200");
+  
+  // Calculating payroll
+  const totalPayroll = calculatePayroll(employeeRecords);
+  console.log(totalPayroll); // Output the total payroll
