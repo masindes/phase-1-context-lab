@@ -41,6 +41,10 @@ function hoursWorkedOnDate(employee, date) {
 
     return (timeOut.hour - timeIn.hour) / 100; // Calculate hours worked and convert to hours
 }
+function wagesEarnedOnDate(employee, date) {
+    let hours = hoursWorkedOnDate(employee, date); // Get the number of hours worked on the given date
+    return hours * employee.payPerHour; // Multiply hours worked by the employee's pay per hour
+}
 
 /*
  We're giving you this function. Take a look at it, you might see some usage
