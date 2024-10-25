@@ -110,6 +110,28 @@ let employees = [
     ["Thor", "Odinsson", "God of Thunder", 20],
     ["Loki", "Laufeysson-Odinsson", "Evil Genius", 15]
 ];
+function createTimeInEvent(employee, dateTime) {
+    let [date, hour] = dateTime.split(' '); // Split dateTime into date and hour parts
+
+    employee.timeInEvents.push({
+        type: "TimeIn", // Creates the correct type
+        hour: parseInt(hour, 10), // Extracts the correct hour and converts it to an integer
+        date: date // Extracts the correct date
+    });
+
+    return employee; // Return the updated employee record
+}
+function createTimeOutEvent(employee, dateTime) {
+    let [date, hour] = dateTime.split(' '); // Split dateTime into date and hour parts
+
+    employee.timeOutEvents.push({
+        type: "TimeOut", // Creates the correct type
+        hour: parseInt(hour, 10), // Extracts the correct hour and converts it to an integer
+        date: date // Extracts the correct date
+    });
+
+    return employee; // Return the updated employee record
+}
 
 let employeeRecords = createEmployeeRecords(employees); // Create employee records from array of arrays
 
