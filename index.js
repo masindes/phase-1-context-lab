@@ -24,6 +24,17 @@ function createTimeInEvent(employee, dateTime) {
 
     return employee; // Return the updated employee record
 }
+function createTimeOutEvent(employee, dateTime) {
+    let [date, hour] = dateTime.split(' '); // Split dateTime into date and hour parts
+
+    employee.timeOutEvents.push({
+        type: "TimeOut", // Set type to "TimeOut"
+        hour: parseInt(hour, 10), // Parse the hour part as an integer
+        date: date // Set the date
+    });
+
+    return employee; // Return the updated employee record
+}
 
 /*
  We're giving you this function. Take a look at it, you might see some usage
